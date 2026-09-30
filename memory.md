@@ -11,8 +11,17 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 
 ## 3. Estado Actual
 *   [Completado] Estructura base del backend y del frontend.
-*   [Pendiente] Agregar DATABASE_URL de Supabase en backend/.env.
-*   [Pendiente] Inicializar repositorio Git.
+*   [Completado] Repositorio Git inicializado con el primer commit.
+*   [Completado] Conexión a Supabase verificada. Migración base aplicada.
+*   [Completado] DATABASE_URL configurada en backend/.env.
+
+## 3.1 Conexión a Supabase (IMPORTANTE)
+*   La conexión directa (db.<ref>.supabase.co) es solo IPv6 y falla aquí.
+*   Se usa el pooler de IPv4. Host: aws-0-us-east-2.pooler.supabase.com
+*   Puerto: 5432 (modo sesión, obligatorio para Alembic).
+*   Usuario del pooler: postgres.<ref-del-proyecto>
+*   La clave contiene el símbolo de porcentaje. Por eso Alembic lee la URL
+    desde app/core/config.py y no desde el archivo alembic.ini.
 
 ## 4. Estructura del Proyecto
 
@@ -46,8 +55,8 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 ### Fase 1: Base y MVP (Público)
 - [x] Configurar servidor FastAPI base (Carpeta: backend).
 - [x] Inicializar proyecto Vue 3 + Vite + Tailwind (Carpeta: frontend).
-- [ ] Crear interfaz Mobile-First de bienvenida.
-- [ ] Conectar Supabase y crear la primera migración.
+- [x] Crear interfaz Mobile-First de bienvenida.
+- [x] Conectar Supabase y crear la primera migración.
 
 ### Fase 2: Gestión Interna e Inventario
 - [ ] Sistema de Autenticación.
@@ -60,3 +69,5 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 
 ## 7. Registro de Cambios
 *   2026-09-30: Estructura base creada. Backend con FastAPI, SQLAlchemy y Alembic. Frontend con Vue 3, Vite y Tailwind 4. Ambos probados.
+*   2026-09-30: Repositorio Git inicializado. Commit inicial fa69ac3.
+*   2026-09-30: Conexión a Supabase vía pooler IPv4. Migración 8045eee03791 aplicada. Endpoint /health responde con database ok.

@@ -18,7 +18,9 @@ Aplicacion web Mobile-First para la gestion de un huerto universitario.
    backend/.venv/bin/pip install -r backend/requirements.txt
 
 3. Copiar backend/.env.example a backend/.env.
-   Agrega tu DATABASE_URL de Supabase.
+   Usa el pooler de Supabase, no la conexion directa.
+   Formato: postgresql+psycopg://postgres.<ref>@aws-0-us-east-2.pooler.supabase.com:5432/postgres
+   La conexion directa es solo IPv6 y puede fallar.
 
 4. Iniciar el servidor.
 
