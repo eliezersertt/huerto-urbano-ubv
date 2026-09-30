@@ -1,20 +1,22 @@
-from sqlalchemy import Integer, String, Text
+from sqlalchemy import Float, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
 
 
 class Plant(Base):
-    """A plant registered in the urban garden."""
+    """A plant registered in the urban garden census."""
 
     __tablename__ = "plants"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
-    nombre_comun: Mapped[str] = mapped_column(String(120), nullable=False)
+    common_name: Mapped[str | None] = mapped_column(String(120))
 
-    especie_cientifica: Mapped[str | None] = mapped_column(String(160))
+    scientific_name: Mapped[str | None] = mapped_column(String(160))
 
-    descripcion: Mapped[str | None] = mapped_column(Text)
+    origin: Mapped[str | None] = mapped_column(String(120))
+
+    height: Mapped[float | None] = mapped_column(Float)
 
     qr_code_url: Mapped[str | None] = mapped_column(String(500), index=True)

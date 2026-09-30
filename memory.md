@@ -14,7 +14,9 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 *   [Completado] Repositorio Git inicializado con el primer commit.
 *   [Completado] Conexión a Supabase verificada. Migración base aplicada.
 *   [Completado] DATABASE_URL configurada en backend/.env.
-*   [Completado] Modelo Plant creado y migrado a Supabase.
+*   [Completado] Modelo Plant en inglés y migrado a Supabase.
+*   [Completado] Esquemas Pydantic y router de plants (listar, ver, crear).
+*   [Completado] Base poblada con 145 filas desde plantas.md.
 
 ## 3.1 Conexión a Supabase (IMPORTANTE)
 *   La conexión directa (db.<ref>.supabase.co) es solo IPv6 y falla aquí.
@@ -33,16 +35,20 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 *   `app/routers/`: rutas de la API.
 *   `app/models/`: modelos de base de datos.
 *   `app/models/plant.py`: modelo Plant (tabla `plants`).
+*   `app/schemas/plant.py`: esquemas Pydantic de Plant.
+*   `app/routers/plants.py`: rutas listar, ver y crear.
 *   `app/schemas/`: esquemas Pydantic.
 *   `alembic/`: migraciones.
+*   `scripts/seed_plants.py`: poblar la base desde plantas.md.
 *   `.env`: variables locales (no se sube a Git).
 
 ### Tabla plants
-Campos del modelo Plant para lectura de códigos QR.
+Campos del modelo Plant, todos en inglés.
 *   `id`: entero, clave primaria.
-*   `nombre_comun`: texto, obligatorio, máximo 120.
-*   `especie_cientifica`: texto, opcional, máximo 160.
-*   `descripcion`: texto largo, opcional.
+*   `common_name`: texto, opcional, máximo 120.
+*   `scientific_name`: texto, opcional, máximo 160.
+*   `origin`: texto, opcional, máximo 120.
+*   `height`: número decimal (metros), opcional.
 *   `qr_code_url`: texto, opcional, máximo 500, con índice.
 
 ### frontend/
@@ -56,6 +62,7 @@ Campos del modelo Plant para lectura de códigos QR.
 *   Iniciar: `cd backend && .venv/bin/uvicorn app.main:app --reload`
 *   Migración: `cd backend && .venv/bin/alembic revision --autogenerate -m "mensaje"`
 *   Aplicar: `cd backend && .venv/bin/alembic upgrade head`
+*   Poblar: `cd backend && .venv/bin/python scripts/seed_plants.py`
 
 ### Frontend
 *   Iniciar: `cd frontend && npm run dev`
@@ -82,3 +89,4 @@ Campos del modelo Plant para lectura de códigos QR.
 *   2026-09-30: Repositorio Git inicializado. Commit inicial fa69ac3.
 *   2026-09-30: Conexión a Supabase vía pooler IPv4. Migración 8045eee03791 aplicada. Endpoint /health responde con database ok.
 *   2026-09-30: Modelo Plant creado. Migración a5111ffa4082 aplicada. Tabla plants creada en Supabase con 5 columnas.
+*   2026-09-30: Columnas de plants renombradas a inglés. Migración 27af2fbbf3b9. Esquemas, router y script seed_plants.py creados. 145 filas importadas desde plantas.md.
