@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     # postgresql+psycopg://user:password@host:5432/database
     database_url: str = ""
 
+    # Public base URL used to build the QR code links.
+    public_base_url: str = "http://localhost:5173"
+
     cors_origins: list[str] = ["http://localhost:5173"]
 
 

@@ -11,11 +11,17 @@ class Plant(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
+    census_number: Mapped[int | None] = mapped_column(Integer, unique=True)
+
     common_name: Mapped[str | None] = mapped_column(String(120))
 
     scientific_name: Mapped[str | None] = mapped_column(String(160))
 
     origin: Mapped[str | None] = mapped_column(String(120))
+
+    dap: Mapped[float | None] = mapped_column(Float)
+
+    trunk_shape: Mapped[str | None] = mapped_column(String(80))
 
     height: Mapped[float | None] = mapped_column(Float)
 

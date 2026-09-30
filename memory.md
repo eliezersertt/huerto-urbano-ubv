@@ -17,6 +17,10 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 *   [Completado] Modelo Plant en inglés y migrado a Supabase.
 *   [Completado] Esquemas Pydantic y router de plants (listar, ver, crear).
 *   [Completado] Base poblada con 145 filas desde plantas.md.
+*   [Completado] Campos de censo: census_number, dap y trunk_shape.
+*   [Completado] Textos limpiados: nombres en Título y científicos capitalizados.
+*   [Completado] Frontend: listado y ficha de planta con router.
+*   [Completado] Generación de QR en SVG apuntando a /planta/{census}.
 
 ## 3.1 Conexión a Supabase (IMPORTANTE)
 *   La conexión directa (db.<ref>.supabase.co) es solo IPv6 y falla aquí.
@@ -45,14 +49,20 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 ### Tabla plants
 Campos del modelo Plant, todos en inglés.
 *   `id`: entero, clave primaria.
+*   `census_number`: entero, único. Es el número de la placa física.
 *   `common_name`: texto, opcional, máximo 120.
 *   `scientific_name`: texto, opcional, máximo 160.
 *   `origin`: texto, opcional, máximo 120.
+*   `dap`: número decimal (cm), opcional.
+*   `trunk_shape`: texto, opcional, máximo 80.
 *   `height`: número decimal (metros), opcional.
 *   `qr_code_url`: texto, opcional, máximo 500, con índice.
 
 ### frontend/
-*   `src/App.vue`: pantalla de bienvenida mobile-first.
+*   `src/App.vue`: contenedor con RouterView.
+*   `src/router/index.js`: rutas `/` y `/planta/:censusNumber`.
+*   `src/views/PlantListView.vue`: listado de plantas.
+*   `src/views/PlantDetailView.vue`: ficha de planta con QR.
 *   `src/style.css`: import de Tailwind.
 *   `vite.config.js`: plugins de Vue y Tailwind, proxy `/api`.
 
@@ -90,3 +100,4 @@ Campos del modelo Plant, todos en inglés.
 *   2026-09-30: Conexión a Supabase vía pooler IPv4. Migración 8045eee03791 aplicada. Endpoint /health responde con database ok.
 *   2026-09-30: Modelo Plant creado. Migración a5111ffa4082 aplicada. Tabla plants creada en Supabase con 5 columnas.
 *   2026-09-30: Columnas de plants renombradas a inglés. Migración 27af2fbbf3b9. Esquemas, router y script seed_plants.py creados. 145 filas importadas desde plantas.md.
+*   2026-09-30: Añadidos census_number, dap y trunk_shape. Migración 538ce093b0cb. Textos limpiados. QR en SVG. Frontend con listado y ficha de planta.
