@@ -14,6 +14,7 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 *   [Completado] Repositorio Git inicializado con el primer commit.
 *   [Completado] Conexión a Supabase verificada. Migración base aplicada.
 *   [Completado] DATABASE_URL configurada en backend/.env.
+*   [Completado] Modelo Plant creado y migrado a Supabase.
 
 ## 3.1 Conexión a Supabase (IMPORTANTE)
 *   La conexión directa (db.<ref>.supabase.co) es solo IPv6 y falla aquí.
@@ -31,9 +32,18 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 *   `app/core/database.py`: motor SQLAlchemy, Base y sesión.
 *   `app/routers/`: rutas de la API.
 *   `app/models/`: modelos de base de datos.
+*   `app/models/plant.py`: modelo Plant (tabla `plants`).
 *   `app/schemas/`: esquemas Pydantic.
 *   `alembic/`: migraciones.
 *   `.env`: variables locales (no se sube a Git).
+
+### Tabla plants
+Campos del modelo Plant para lectura de códigos QR.
+*   `id`: entero, clave primaria.
+*   `nombre_comun`: texto, obligatorio, máximo 120.
+*   `especie_cientifica`: texto, opcional, máximo 160.
+*   `descripcion`: texto largo, opcional.
+*   `qr_code_url`: texto, opcional, máximo 500, con índice.
 
 ### frontend/
 *   `src/App.vue`: pantalla de bienvenida mobile-first.
@@ -71,3 +81,4 @@ Aplicación web "Mobile-First" (PWA) para la gestión de un huerto universitario
 *   2026-09-30: Estructura base creada. Backend con FastAPI, SQLAlchemy y Alembic. Frontend con Vue 3, Vite y Tailwind 4. Ambos probados.
 *   2026-09-30: Repositorio Git inicializado. Commit inicial fa69ac3.
 *   2026-09-30: Conexión a Supabase vía pooler IPv4. Migración 8045eee03791 aplicada. Endpoint /health responde con database ok.
+*   2026-09-30: Modelo Plant creado. Migración a5111ffa4082 aplicada. Tabla plants creada en Supabase con 5 columnas.
