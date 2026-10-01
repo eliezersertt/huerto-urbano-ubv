@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
+import { apiUrl } from '../lib/api'
 
 const plants = ref([])
 const loading = ref(true)
@@ -9,7 +10,7 @@ const total = computed(() => plants.value.length)
 
 onMounted(async () => {
   try {
-    const response = await fetch('/api/plants')
+    const response = await fetch(apiUrl('/plants'))
     if (!response.ok) throw new Error('No se pudieron cargar las plantas')
     plants.value = await response.json()
   } catch (e) {

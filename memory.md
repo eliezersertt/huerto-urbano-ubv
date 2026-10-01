@@ -79,6 +79,15 @@ Campos del modelo Plant, todos en inglés.
 *   Logo oficial: colocar en `frontend/public/logo-ubv.png`.
     La portada muestra un espacio circular reservado para él.
 
+## 4.2 Despliegue (Render + Vercel)
+*   Frontend: la URL del backend sale siempre de `VITE_API_URL`.
+    No hay proxy ni localhost en el código. Ver `src/lib/api.js`.
+*   Vercel: definir `VITE_API_URL` con la URL de Render.
+*   Render: definir `DATABASE_URL`, `CORS_ORIGINS=["*"]` y
+    `PUBLIC_BASE_URL` con la URL de Vercel.
+*   CORS abierto temporalmente. Cerrarlo cuando el dominio esté fijo.
+*   Detalles completos en `README.md`, sección Despliegue.
+
 ## 5. Comandos Útiles
 
 ### Backend
@@ -116,3 +125,4 @@ Campos del modelo Plant, todos en inglés.
 *   2026-09-30: Añadidos census_number, dap y trunk_shape. Migración 538ce093b0cb. Textos limpiados. QR en SVG. Frontend con listado y ficha de planta.
 *   2026-10-01: Skill frontend-design instalada. Rediseño orgánico del frontend. Navbar y 4 maquetas visuales: Inventario, Ciclos y Horarios, Semilleros y Responsables.
 *   2026-10-01: Pivote a identidad UBV. Azul marino principal, verde de acento. Portada en `/`, censo movido a `/censo`. Logo reservado en `/logo-ubv.png`.
+*   2026-10-01: Preparación de despliegue. CORS abierto, requirements ordenado y frontend usando VITE_API_URL. README con guía de Render y Vercel.

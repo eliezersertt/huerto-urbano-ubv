@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { apiUrl } from '../lib/api'
 
 const route = useRoute()
 
@@ -9,12 +10,14 @@ const loading = ref(true)
 const error = ref('')
 
 const qrUrl = computed(() =>
-  plant.value ? `/api/plants/${plant.value.id}/qr` : ''
+  plant.value ? apiUrl(`/plants/${plant.value.id}/qr`) : ''
 )
 
 onMounted(async () => {
   try {
-    const response = await fetch(`/api/plants/census/${route.params.censusNumber}`)
+    const response = await fetch(
+      apiUrl(`/plants/census/${route.params.censusNumber}`)
+    )
     if (response.status === 404) throw new Error('Esta placa no está en el censo')
     if (!response.ok) throw new Error('No se pudo cargar la ficha')
     plant.value = await response.json()

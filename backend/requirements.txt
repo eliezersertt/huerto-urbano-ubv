@@ -1,8 +1,16 @@
+# == Framework web ==
 fastapi==0.142.2
 uvicorn[standard]==0.54.0
+
+# == Configuracion ==
 pydantic-settings==2.15.0
+python-dotenv==1.2.3
+
+# == Base de datos (PostgreSQL) ==
+# psycopg 3 es el driver moderno. Se usa con postgresql+psycopg://
 sqlalchemy==2.1.1
 alembic==1.20.0
 psycopg[binary]==3.3.6
-python-dotenv==1.2.3
+
+# == Codigos QR ==
 qrcode==8.2

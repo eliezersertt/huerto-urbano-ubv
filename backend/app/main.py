@@ -10,6 +10,9 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# CORS is temporarily open ("*") so the deployed frontend (Vercel) can
+# reach this API. Starlette echoes the origin when credentials are on.
+# Restrict the origins once the frontend domain is fixed.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
