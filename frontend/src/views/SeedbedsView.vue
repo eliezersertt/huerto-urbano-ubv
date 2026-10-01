@@ -12,11 +12,11 @@ const seedbeds = [
 <template>
   <main class="mx-auto w-full max-w-lg px-5 py-10">
     <header>
-      <p class="text-sm font-medium text-leaf">Gestión interna</p>
-      <h1 class="mt-2 font-display text-4xl font-medium leading-tight text-leaf-deep">
+      <p class="text-sm font-medium text-ubv">Gestión interna</p>
+      <h1 class="mt-2 font-display text-4xl font-medium leading-tight text-ubv-deep">
         Semilleros
       </h1>
-      <p class="mt-2 max-w-sm text-base text-moss">
+      <p class="mt-2 max-w-sm text-base text-slate">
         Estado de germinación de las bandejas en vivero.
       </p>
     </header>
@@ -34,7 +34,7 @@ const seedbeds = [
           </span>
         </div>
 
-        <p class="mt-1 text-sm text-moss">
+        <p class="mt-1 text-sm text-slate">
           {{ bed.species }} · sembrado el {{ bed.planted }}
         </p>
 
@@ -45,7 +45,7 @@ const seedbeds = [
               :style="{ width: bed.progress + '%' }"
             ></div>
           </div>
-          <span class="font-display text-sm font-medium text-leaf-deep">
+          <span class="font-display text-sm font-medium text-ubv-deep">
             {{ bed.progress }}%
           </span>
         </div>

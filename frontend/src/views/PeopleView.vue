@@ -12,11 +12,11 @@ const people = [
 <template>
   <main class="mx-auto w-full max-w-lg px-5 py-10">
     <header>
-      <p class="text-sm font-medium text-leaf">Gestión interna</p>
-      <h1 class="mt-2 font-display text-4xl font-medium leading-tight text-leaf-deep">
+      <p class="text-sm font-medium text-ubv">Gestión interna</p>
+      <h1 class="mt-2 font-display text-4xl font-medium leading-tight text-ubv-deep">
         Responsables
       </h1>
-      <p class="mt-2 max-w-sm text-base text-moss">
+      <p class="mt-2 max-w-sm text-base text-slate">
         Equipo del huerto y sus áreas de trabajo.
       </p>
     </header>
@@ -28,7 +28,7 @@ const people = [
         class="flex items-center gap-4 rounded-2xl border border-line bg-card p-4 shadow-card"
       >
         <span
-          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-leaf/[0.08] font-display text-base font-medium text-leaf ring-1 ring-leaf/20"
+          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ubv/[0.06] font-display text-base font-medium text-ubv ring-1 ring-ubv/20"
           aria-hidden="true"
         >
           {{ person.initials }}
@@ -36,7 +36,7 @@ const people = [
 
         <div class="min-w-0 flex-1">
           <p class="truncate font-display text-base text-ink">{{ person.name }}</p>
-          <p class="text-sm text-moss">{{ person.role }}</p>
+          <p class="text-sm text-slate">{{ person.role }}</p>
         </div>
 
         <span class="shrink-0 rounded-full bg-sage px-2.5 py-1 text-xs font-medium text-leaf-deep">

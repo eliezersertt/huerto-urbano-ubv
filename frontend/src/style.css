@@ -1,26 +1,32 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Paleta: naturaleza y hoja */
-  --color-leaf: #2e5d3b;
-  --color-leaf-deep: #1f4028;
-  --color-leaf-soft: #4a7757;
-  --color-sage: #e6eddf;
-  --color-sage-strong: #d5e1ca;
-  --color-moss: #5f6f5b;
-  --color-ink: #1f2a20;
-  --color-paper: #f3f6ed;
+  /* Identidad UBV: azul marino protagonista */
+  --color-ubv: #14306b;
+  --color-ubv-deep: #0b1e45;
+  --color-ubv-soft: #2a4a9a;
+  --color-mist: #e8edf7;
+  --color-ink: #14213f;
+  --color-slate: #5a6b8c;
+  --color-paper: #f4f6fb;
   --color-card: #ffffff;
+  --color-line: #d9e0f0;
+
+  /* Verde: solo acento (botones, hojas, íconos) */
+  --color-leaf: #2e7d4f;
+  --color-leaf-deep: #1f5c39;
+  --color-sage: #e3efe7;
+
+  /* Ámbar: estados de aviso */
   --color-seed: #b98a3c;
-  --color-line: #dce4d2;
 
   /* Tipografía */
   --font-sans: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Fraunces', Georgia, serif;
 
   /* Sombras suaves */
-  --shadow-card: 0 1px 2px rgb(31 64 40 / 0.04), 0 6px 18px -10px rgb(31 64 40 / 0.1);
-  --shadow-soft: 0 14px 44px -16px rgb(31 64 40 / 0.16);
+  --shadow-card: 0 1px 2px rgb(11 30 69 / 0.04), 0 6px 18px -10px rgb(11 30 69 / 0.1);
+  --shadow-soft: 0 14px 44px -16px rgb(11 30 69 / 0.18);
 }
 
 @layer base {

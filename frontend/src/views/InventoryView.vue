@@ -14,11 +14,11 @@ const items = [
 <template>
   <main class="mx-auto w-full max-w-lg px-5 py-10">
     <header>
-      <p class="text-sm font-medium text-leaf">Gestión interna</p>
-      <h1 class="mt-2 font-display text-4xl font-medium leading-tight text-leaf-deep">
+      <p class="text-sm font-medium text-ubv">Gestión interna</p>
+      <h1 class="mt-2 font-display text-4xl font-medium leading-tight text-ubv-deep">
         Inventario
       </h1>
-      <p class="mt-2 max-w-sm text-base text-moss">
+      <p class="mt-2 max-w-sm text-base text-slate">
         Herramientas e insumos disponibles para el cuidado del huerto.
       </p>
     </header>
@@ -40,12 +40,12 @@ const items = [
 
         <div class="min-w-0 flex-1">
           <p class="truncate font-display text-base text-ink">{{ item.name }}</p>
-          <p class="text-xs text-moss">{{ item.category }}</p>
+          <p class="text-xs text-slate">{{ item.category }}</p>
         </div>
 
         <div class="text-right">
-          <p class="font-display text-xl font-medium text-leaf-deep">{{ item.quantity }}</p>
-          <p class="text-xs text-moss">{{ item.unit }}</p>
+          <p class="font-display text-xl font-medium text-ubv-deep">{{ item.quantity }}</p>
+          <p class="text-xs text-slate">{{ item.unit }}</p>
         </div>
 
         <span
