@@ -1,14 +1,16 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const plants = ref([])
 const loading = ref(true)
 const error = ref('')
 
+const total = computed(() => plants.value.length)
+
 onMounted(async () => {
   try {
     const response = await fetch('/api/plants')
-    if (!response.ok) throw new Error('Error al cargar las plantas')
+    if (!response.ok) throw new Error('No se pudieron cargar las plantas')
     plants.value = await response.json()
   } catch (e) {
     error.value = e.message || 'Sin conexión con el servidor'
@@ -19,49 +21,67 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="min-h-screen bg-green-50 px-4 py-6">
-    <div class="mx-auto w-full max-w-md">
-      <header class="mb-6 text-center">
-        <h1 class="text-2xl font-bold text-green-800">Huerto Urbano</h1>
-        <p class="mt-1 text-sm text-green-700">Censo arbóreo</p>
+  <main class="min-h-screen bg-paper text-ink">
+    <div class="mx-auto w-full max-w-lg px-5 py-10">
+      <header>
+        <p class="text-sm font-medium text-leaf">Universidad · Jardín botánico</p>
+        <h1 class="mt-2 font-display text-4xl font-medium leading-tight text-leaf-deep">
+          Huerto Urbano
+        </h1>
+        <p class="mt-2 max-w-sm text-base text-moss">
+          Censo arbóreo de la parcela sur. Escanea una placa para ver su ficha.
+        </p>
+
+        <div class="mt-6 flex items-baseline gap-3 border-t border-line pt-5">
+          <span class="font-display text-5xl font-medium text-leaf">{{ total }}</span>
+          <span class="text-sm text-moss">ejemplares registrados</span>
+        </div>
       </header>
 
-      <p v-if="loading" class="text-center text-sm text-gray-500">
-        Cargando plantas...
+      <p v-if="loading" class="mt-10 text-center text-sm text-moss">
+        Cargando el censo...
       </p>
 
-      <p v-else-if="error" class="rounded-lg bg-red-100 p-3 text-sm text-red-700">
+      <p
+        v-else-if="error"
+        class="mt-10 rounded-xl border border-seed/30 bg-seed/10 p-4 text-sm text-leaf-deep"
+      >
         {{ error }}
       </p>
 
-      <ul v-else class="space-y-3">
+      <ol v-else class="mt-8 divide-y divide-line">
         <li v-for="plant in plants" :key="plant.id">
           <RouterLink
             :to="`/planta/${plant.census_number}`"
-            class="block rounded-xl bg-white p-4 shadow"
+            class="group -mx-3 flex items-center gap-4 rounded-2xl px-3 py-4 transition-colors duration-200 hover:bg-sage/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf"
           >
-            <div class="flex items-start justify-between gap-2">
-              <div>
-                <p class="font-semibold text-gray-800">
-                  {{ plant.common_name || 'Sin nombre' }}
-                </p>
-                <p class="text-sm italic text-gray-500">
-                  {{ plant.scientific_name || 'Sin especie' }}
-                </p>
-              </div>
-              <span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
-                N.º {{ plant.census_number }}
+            <span
+              class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-leaf/35 bg-leaf/[0.06] font-display text-lg font-medium text-leaf transition-transform duration-200 motion-reduce:transition-none group-hover:scale-105 motion-reduce:group-hover:scale-100"
+            >
+              {{ plant.census_number }}
+            </span>
+
+            <span class="min-w-0 flex-1">
+              <span class="block truncate font-display text-lg text-ink">
+                {{ plant.common_name || 'Sin nombre' }}
               </span>
-            </div>
-            <p v-if="plant.height" class="mt-2 text-sm text-gray-600">
-              Altura: {{ plant.height }} m
-            </p>
+              <span class="block truncate text-sm italic text-moss">
+                {{ plant.scientific_name || 'Especie sin registrar' }}
+              </span>
+            </span>
+
+            <span v-if="plant.height" class="shrink-0 text-sm text-moss">
+              {{ plant.height }} m
+            </span>
           </RouterLink>
         </li>
-      </ul>
+      </ol>
 
-      <p v-if="!loading && !error && plants.length === 0" class="text-center text-sm text-gray-500">
-        No hay plantas registradas.
+      <p
+        v-if="!loading && !error && plants.length === 0"
+        class="mt-10 text-center text-sm text-moss"
+      >
+        Aún no hay ejemplares registrados.
       </p>
     </div>
   </main>

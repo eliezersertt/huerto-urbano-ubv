@@ -15,8 +15,8 @@ const qrUrl = computed(() =>
 onMounted(async () => {
   try {
     const response = await fetch(`/api/plants/census/${route.params.censusNumber}`)
-    if (response.status === 404) throw new Error('Planta no encontrada')
-    if (!response.ok) throw new Error('Error al cargar la planta')
+    if (response.status === 404) throw new Error('Esta placa no está en el censo')
+    if (!response.ok) throw new Error('No se pudo cargar la ficha')
     plant.value = await response.json()
   } catch (e) {
     error.value = e.message || 'Sin conexión con el servidor'
@@ -27,68 +27,85 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="min-h-screen bg-green-50 px-4 py-6">
-    <div class="mx-auto w-full max-w-md">
+  <main class="min-h-screen bg-paper text-ink">
+    <div class="mx-auto w-full max-w-lg px-5 py-8">
       <RouterLink
         to="/"
-        class="mb-4 inline-block text-sm text-green-700 underline"
+        class="inline-flex items-center gap-1.5 rounded-full border border-leaf/30 bg-card px-4 py-2 text-sm font-medium text-leaf transition-colors duration-200 hover:bg-leaf hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf"
       >
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+        >
+          <path d="M10 3 5 8l5 5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
         Volver al listado
       </RouterLink>
 
-      <p v-if="loading" class="text-center text-sm text-gray-500">
-        Cargando...
+      <p v-if="loading" class="mt-10 text-center text-sm text-moss">
+        Cargando la ficha...
       </p>
 
-      <p v-else-if="error" class="rounded-lg bg-red-100 p-3 text-sm text-red-700">
+      <p
+        v-else-if="error"
+        class="mt-10 rounded-xl border border-seed/30 bg-seed/10 p-4 text-sm text-leaf-deep"
+      >
         {{ error }}
       </p>
 
       <template v-else-if="plant">
-        <section class="rounded-xl bg-white p-5 shadow">
-          <div class="flex items-start justify-between gap-2">
-            <h1 class="text-xl font-bold text-gray-800">
-              {{ plant.common_name || 'Sin nombre' }}
-            </h1>
-            <span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
-              N.º {{ plant.census_number }}
+        <header class="mt-6">
+          <div class="flex items-center gap-3">
+            <span
+              class="flex h-11 w-11 items-center justify-center rounded-full border border-leaf/35 bg-leaf/[0.06] font-display text-base font-medium text-leaf"
+            >
+              {{ plant.census_number }}
             </span>
+            <span class="text-sm font-medium text-moss">Placa del ejemplar</span>
           </div>
 
-          <dl class="mt-4 space-y-2 text-sm">
-            <div v-if="plant.scientific_name">
-              <dt class="text-gray-500">Nombre científico</dt>
-              <dd class="italic text-gray-800">{{ plant.scientific_name }}</dd>
-            </div>
-            <div v-if="plant.origin">
-              <dt class="text-gray-500">Origen</dt>
-              <dd class="text-gray-800">{{ plant.origin }}</dd>
-            </div>
-            <div v-if="plant.dap">
-              <dt class="text-gray-500">Diámetro (DAP)</dt>
-              <dd class="text-gray-800">{{ plant.dap }} cm</dd>
-            </div>
-            <div v-if="plant.trunk_shape">
-              <dt class="text-gray-500">Forma del fuste</dt>
-              <dd class="text-gray-800">{{ plant.trunk_shape }}</dd>
-            </div>
-            <div v-if="plant.height">
-              <dt class="text-gray-500">Altura</dt>
-              <dd class="text-gray-800">{{ plant.height }} m</dd>
-            </div>
-          </dl>
-        </section>
-
-        <section class="mt-5 rounded-xl bg-white p-5 text-center shadow">
-          <h2 class="text-base font-semibold text-gray-800">Código QR</h2>
-          <p class="mt-1 text-xs text-gray-500">
-            Escanéalo para abrir esta ficha.
+          <h1 class="mt-4 font-display text-3xl font-medium leading-tight text-leaf-deep">
+            {{ plant.common_name || 'Ejemplar sin nombre' }}
+          </h1>
+          <p v-if="plant.scientific_name" class="mt-1 text-base italic text-moss">
+            {{ plant.scientific_name }}
           </p>
-          <img
-            :src="qrUrl"
-            alt="Código QR de la planta"
-            class="mx-auto mt-3 h-52 w-52"
-          />
+        </header>
+
+        <dl class="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line">
+          <div v-if="plant.origin" class="bg-card p-4">
+            <dt class="text-xs text-moss">Origen</dt>
+            <dd class="mt-1 text-sm font-medium text-ink">{{ plant.origin }}</dd>
+          </div>
+          <div v-if="plant.dap" class="bg-card p-4">
+            <dt class="text-xs text-moss">Diámetro (DAP)</dt>
+            <dd class="mt-1 text-sm font-medium text-ink">{{ plant.dap }} cm</dd>
+          </div>
+          <div v-if="plant.trunk_shape" class="bg-card p-4">
+            <dt class="text-xs text-moss">Forma del fuste</dt>
+            <dd class="mt-1 text-sm font-medium text-ink">{{ plant.trunk_shape }}</dd>
+          </div>
+          <div v-if="plant.height" class="bg-card p-4">
+            <dt class="text-xs text-moss">Altura</dt>
+            <dd class="mt-1 text-sm font-medium text-ink">{{ plant.height }} m</dd>
+          </div>
+        </dl>
+
+        <section class="mt-8 rounded-3xl border border-line bg-card p-7 text-center shadow-soft">
+          <h2 class="font-display text-xl font-medium text-leaf-deep">Código QR</h2>
+          <p class="mt-1 text-sm text-moss">Escanea para abrir esta ficha.</p>
+
+          <div class="mt-5 inline-block rounded-2xl border border-line bg-white p-4">
+            <img
+              :src="qrUrl"
+              alt="Código QR del ejemplar"
+              class="h-52 w-52"
+            />
+          </div>
         </section>
       </template>
     </div>

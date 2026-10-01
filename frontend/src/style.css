@@ -1,1 +1,37 @@
 @import 'tailwindcss';
+
+@theme {
+  /* Paleta: naturaleza y hoja */
+  --color-leaf: #2e5d3b;
+  --color-leaf-deep: #1f4028;
+  --color-leaf-soft: #4a7757;
+  --color-sage: #e6eddf;
+  --color-sage-strong: #d5e1ca;
+  --color-moss: #5f6f5b;
+  --color-ink: #1f2a20;
+  --color-paper: #f3f6ed;
+  --color-card: #ffffff;
+  --color-seed: #b98a3c;
+  --color-line: #dce4d2;
+
+  /* Tipografía */
+  --font-sans: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+
+  /* Sombras suaves */
+  --shadow-card: 0 1px 2px rgb(31 64 40 / 0.04), 0 6px 18px -10px rgb(31 64 40 / 0.1);
+  --shadow-soft: 0 14px 44px -16px rgb(31 64 40 / 0.16);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+}
