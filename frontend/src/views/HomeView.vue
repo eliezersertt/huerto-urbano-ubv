@@ -29,16 +29,16 @@ const values = [
     <section class="bg-ubv text-white">
       <div class="mx-auto w-full max-w-lg px-5 py-16 text-center">
         <div
-          class="mx-auto flex h-32 w-32 items-center justify-center rounded-full bg-white shadow-soft"
+          class="mx-auto flex h-48 w-48 items-center justify-center overflow-hidden rounded-full ring-1 ring-white/25 sm:h-60 sm:w-60"
         >
           <img
             v-if="!logoFailed"
             :src="logoPath"
             alt="Logo de la Universidad Bolivariana de Venezuela"
-            class="h-full w-full rounded-full object-contain p-4"
+            class="h-full w-full object-cover"
             @error="logoFailed = true"
           />
-          <span v-else class="font-display text-3xl font-medium text-ubv">UBV</span>
+          <span v-else class="font-display text-4xl font-medium text-white/90">UBV</span>
         </div>
 
         <p class="mt-6 text-sm text-white/75">Universidad Bolivariana de Venezuela</p>
