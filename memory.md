@@ -59,11 +59,16 @@ Campos del modelo Plant, todos en inglés.
 *   `qr_code_url`: texto, opcional, máximo 500, con índice.
 
 ### frontend/
-*   `src/App.vue`: contenedor con RouterView.
-*   `src/router/index.js`: rutas `/` y `/planta/:censusNumber`.
-*   `src/views/PlantListView.vue`: listado de plantas.
+*   `src/App.vue`: shell con navbar y RouterView.
+*   `src/components/AppNavbar.vue`: menú de navegación superior.
+*   `src/router/index.js`: rutas de todas las secciones.
+*   `src/views/PlantListView.vue`: listado de plantas (Censo Arbóreo).
 *   `src/views/PlantDetailView.vue`: ficha de planta con QR.
-*   `src/style.css`: import de Tailwind.
+*   `src/views/InventoryView.vue`: maqueta de Inventario.
+*   `src/views/CyclesView.vue`: maqueta de Ciclos y Horarios.
+*   `src/views/SeedbedsView.vue`: maqueta de Semilleros.
+*   `src/views/PeopleView.vue`: maqueta de Responsables.
+*   `src/style.css`: tokens de color, tipografía y sombras.
 *   `vite.config.js`: plugins de Vue y Tailwind, proxy `/api`.
 
 ## 5. Comandos Útiles
@@ -101,3 +106,4 @@ Campos del modelo Plant, todos en inglés.
 *   2026-09-30: Modelo Plant creado. Migración a5111ffa4082 aplicada. Tabla plants creada en Supabase con 5 columnas.
 *   2026-09-30: Columnas de plants renombradas a inglés. Migración 27af2fbbf3b9. Esquemas, router y script seed_plants.py creados. 145 filas importadas desde plantas.md.
 *   2026-09-30: Añadidos census_number, dap y trunk_shape. Migración 538ce093b0cb. Textos limpiados. QR en SVG. Frontend con listado y ficha de planta.
+*   2026-10-01: Skill frontend-design instalada. Rediseño orgánico del frontend. Navbar y 4 maquetas visuales: Inventario, Ciclos y Horarios, Semilleros y Responsables.

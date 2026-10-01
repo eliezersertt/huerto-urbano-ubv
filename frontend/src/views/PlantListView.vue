@@ -21,68 +21,66 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="min-h-screen bg-paper text-ink">
-    <div class="mx-auto w-full max-w-lg px-5 py-10">
-      <header>
-        <p class="text-sm font-medium text-leaf">Universidad · Jardín botánico</p>
-        <h1 class="mt-2 font-display text-4xl font-medium leading-tight text-leaf-deep">
-          Huerto Urbano
-        </h1>
-        <p class="mt-2 max-w-sm text-base text-moss">
-          Censo arbóreo de la parcela sur. Escanea una placa para ver su ficha.
-        </p>
-
-        <div class="mt-6 flex items-baseline gap-3 border-t border-line pt-5">
-          <span class="font-display text-5xl font-medium text-leaf">{{ total }}</span>
-          <span class="text-sm text-moss">ejemplares registrados</span>
-        </div>
-      </header>
-
-      <p v-if="loading" class="mt-10 text-center text-sm text-moss">
-        Cargando el censo...
+  <main class="mx-auto w-full max-w-lg px-5 py-10">
+    <header>
+      <p class="text-sm font-medium text-leaf">Universidad · Jardín botánico</p>
+      <h1 class="mt-2 font-display text-4xl font-medium leading-tight text-leaf-deep">
+        Censo Arbóreo
+      </h1>
+      <p class="mt-2 max-w-sm text-base text-moss">
+        Escanea una placa física para abrir la ficha de cada ejemplar.
       </p>
 
-      <p
-        v-else-if="error"
-        class="mt-10 rounded-xl border border-seed/30 bg-seed/10 p-4 text-sm text-leaf-deep"
-      >
-        {{ error }}
-      </p>
+      <div class="mt-6 flex items-baseline gap-3 border-t border-line pt-5">
+        <span class="font-display text-5xl font-medium text-leaf">{{ total }}</span>
+        <span class="text-sm text-moss">ejemplares registrados</span>
+      </div>
+    </header>
 
-      <ol v-else class="mt-8 divide-y divide-line">
-        <li v-for="plant in plants" :key="plant.id">
-          <RouterLink
-            :to="`/planta/${plant.census_number}`"
-            class="group -mx-3 flex items-center gap-4 rounded-2xl px-3 py-4 transition-colors duration-200 hover:bg-sage/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf"
+    <p v-if="loading" class="mt-10 text-center text-sm text-moss">
+      Cargando el censo...
+    </p>
+
+    <p
+      v-else-if="error"
+      class="mt-10 rounded-xl border border-seed/30 bg-seed/10 p-4 text-sm text-leaf-deep"
+    >
+      {{ error }}
+    </p>
+
+    <ol v-else class="mt-8 divide-y divide-line">
+      <li v-for="plant in plants" :key="plant.id">
+        <RouterLink
+          :to="`/planta/${plant.census_number}`"
+          class="group -mx-3 flex items-center gap-4 rounded-2xl px-3 py-4 transition-colors duration-200 hover:bg-sage/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf"
+        >
+          <span
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-leaf/35 bg-leaf/[0.06] font-display text-lg font-medium text-leaf transition-transform duration-200 motion-reduce:transition-none group-hover:scale-105 motion-reduce:group-hover:scale-100"
           >
-            <span
-              class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-leaf/35 bg-leaf/[0.06] font-display text-lg font-medium text-leaf transition-transform duration-200 motion-reduce:transition-none group-hover:scale-105 motion-reduce:group-hover:scale-100"
-            >
-              {{ plant.census_number }}
-            </span>
+            {{ plant.census_number }}
+          </span>
 
-            <span class="min-w-0 flex-1">
-              <span class="block truncate font-display text-lg text-ink">
-                {{ plant.common_name || 'Sin nombre' }}
-              </span>
-              <span class="block truncate text-sm italic text-moss">
-                {{ plant.scientific_name || 'Especie sin registrar' }}
-              </span>
+          <span class="min-w-0 flex-1">
+            <span class="block truncate font-display text-lg text-ink">
+              {{ plant.common_name || 'Sin nombre' }}
             </span>
-
-            <span v-if="plant.height" class="shrink-0 text-sm text-moss">
-              {{ plant.height }} m
+            <span class="block truncate text-sm italic text-moss">
+              {{ plant.scientific_name || 'Especie sin registrar' }}
             </span>
-          </RouterLink>
-        </li>
-      </ol>
+          </span>
 
-      <p
-        v-if="!loading && !error && plants.length === 0"
-        class="mt-10 text-center text-sm text-moss"
-      >
-        Aún no hay ejemplares registrados.
-      </p>
-    </div>
+          <span v-if="plant.height" class="shrink-0 text-sm text-moss">
+            {{ plant.height }} m
+          </span>
+        </RouterLink>
+      </li>
+    </ol>
+
+    <p
+      v-if="!loading && !error && plants.length === 0"
+      class="mt-10 text-center text-sm text-moss"
+    >
+      Aún no hay ejemplares registrados.
+    </p>
   </main>
 </template>
